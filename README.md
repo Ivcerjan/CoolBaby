@@ -1,4 +1,4 @@
-# BabyFoodCooler
+# CoolBaby
 
 An ESP32-based device that reads food temperature with a non-contact IR sensor and blows a fan until it's safe to serve.
 
@@ -33,18 +33,11 @@ An ESP32-based device that reads food temperature with a non-contact IR sensor a
 
 | Sensor | ESP32 |
 |---|---|
-| VIN | 3V3 |
-| GND | GND |
-| SDA | D21 |
-| SCL | D22 |
 
 **Relay (fan control):**
 
 | Relay | ESP32 |
 |---|---|
-| VCC | 5V (VIN) |
-| GND | GND |
-| IN1 | D25 |
 
 Fan connects through the relay's NO/COM contacts, powered from the same 5V source as the ESP32.
 
