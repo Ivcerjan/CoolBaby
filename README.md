@@ -60,6 +60,7 @@ Fan connects through the relay's NO/COM contacts, powered from the same 5V sourc
 
 ## Project Structure
 
+```
 BabyFoodCooler/
 ├── include/
 ├── src/
@@ -68,6 +69,7 @@ BabyFoodCooler/
 ├── platformio.ini # PlatformIO project configuration
 ├── README.md
 └── .gitignore
+```
 
 ## License
 
