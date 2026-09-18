@@ -13,7 +13,7 @@ void setup() {
     Wire.begin(21, 22); // SDA, SCL
 
     if (!mlx.begin()) {
-        Serial.println("Ne mogu pronaći MLX90614 senzor. Provjeri spajanje!");
+        Serial.println("Can't find MLX90614 sensor. Check wires!");
         while (1) {
             delay(1000);
         }
@@ -27,7 +27,7 @@ void setup() {
     tft.setCursor(10, 10);
     tft.println("Ready!");
 
-    Serial.println("Senzor i displej spremni.");
+    Serial.println("Sensor and display ready.");
 }
 
 void loop() {
@@ -37,14 +37,14 @@ void loop() {
 
     tft.setTextSize(2);
     tft.setCursor(10, 10);
-    tft.println("Food Temp:");
+    tft.println("Food temp:");
 
     tft.setTextSize(3);
     tft.setCursor(10, 50);
     tft.setTextColor(TFT_GREEN, TFT_BLACK);
     tft.println(objectTemp, 1);
 
-    Serial.print("Temperatura hrane: ");
+    Serial.print("Food temp: ");
     Serial.println(objectTemp);
 
     delay(1000);
