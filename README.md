@@ -41,8 +41,6 @@ pio device monitor
 
 ## Wiring diagram
 
-## Wiring diagram
-
 <table>
 <tr valign="top">
 <td>
