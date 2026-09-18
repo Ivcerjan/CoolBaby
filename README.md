@@ -29,9 +29,25 @@ An ESP32-based device that reads food temperature with a non-contact IR sensor a
 | Relay | ELEGOO 4-Channel 5V Relay Module |
 | Fan | 5V DC cooling fan (30-40mm) |
 
+## Testing hardware
+
+Each hardware component has a standalone test in `test/`, useful for isolating wiring issues without running the full application.
+
+```bash
+pio run -e test_sensor --target upload    # MLX90614 sensor only
+pio run -e test_display --target upload   # TFT display only
+pio device monitor
+```
+
 ## Wiring diagram
 
-**MLX90614 (I2C):**
+## Wiring diagram
+
+<table>
+<tr valign="top">
+<td>
+
+**MLX90614 (I2C)**
 
 | Sensor | ESP32 |
 |---|---|
@@ -40,7 +56,10 @@ An ESP32-based device that reads food temperature with a non-contact IR sensor a
 | SDA | D21 |
 | SCL | D22 |
 
-**Display (SPI):**
+</td>
+<td>
+
+**Display (SPI)**
 
 | Display | ESP32 |
 |---|---|
@@ -53,13 +72,20 @@ An ESP32-based device that reads food temperature with a non-contact IR sensor a
 | CS | D5 |
 | BLK | 3V3 |
 
-**Relay (fan control):**
+</td>
+<td>
+
+**Relay (fan)**
 
 | Relay | ESP32 |
 |---|---|
 | VCC | 5V (VIN) |
 | GND | GND |
 | IN1 | D25 |
+
+</td>
+</tr>
+</table>
 
 Fan connects through the relay's NO/COM contacts, powered from the same 5V source as the ESP32.
 
