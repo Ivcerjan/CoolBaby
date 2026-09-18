@@ -8,13 +8,14 @@ An ESP32-based device that reads food temperature with a non-contact IR sensor a
 
 ## Quick Look
 
-- **What it does:** Measures food temperature without touching it, and runs a fan automatically until the food cools to a safe temperature
-- **Hardware:** ESP32 + MLX90614 IR temperature sensor + relay-controlled fan
+- **What it does:** Measures food temperature without touching it, shows it live on a TFT screen, and (soon) runs a fan automatically until the food cools to a safe temperature
+- **Hardware:** ESP32 + MLX90614 IR temperature sensor + TFT display + relay-controlled fan
 - **Software:** Built with VSCode + PlatformIO
 
 ## Features
 
 - Non-contact temperature reading via the MLX90614 IR sensor (I2C)
+- Live temperature readout on a TFT display
 - Automatic fan control via relay once a temperature threshold is set
 - Non-blocking main loop using `millis()` timing
 
@@ -24,6 +25,7 @@ An ESP32-based device that reads food temperature with a non-contact IR sensor a
 |---|---|
 | Microcontroller | ESP32 Board (ELEGOO ESP-WROOM-32) |
 | Temperature sensor | Hailege MLX90614 non-contact IR sensor |
+| Display | 1.8" TFT LED display (GERUI 128x160, ST7735 driver) |
 | Relay | ELEGOO 4-Channel 5V Relay Module |
 | Fan | 5V DC cooling fan (30-40mm) |
 
@@ -33,11 +35,31 @@ An ESP32-based device that reads food temperature with a non-contact IR sensor a
 
 | Sensor | ESP32 |
 |---|---|
+| VIN | 3V3 |
+| GND | GND |
+| SDA | D21 |
+| SCL | D22 |
+
+**Display (SPI):**
+
+| Display | ESP32 |
+|---|---|
+| GND | GND |
+| VCC | 3V3 |
+| SCL | D18 |
+| SDA | D23 |
+| RES | D4 |
+| DC | D2 |
+| CS | D5 |
+| BLK | 3V3 |
 
 **Relay (fan control):**
 
 | Relay | ESP32 |
 |---|---|
+| VCC | 5V (VIN) |
+| GND | GND |
+| IN1 | D25 |
 
 Fan connects through the relay's NO/COM contacts, powered from the same 5V source as the ESP32.
 
@@ -46,7 +68,7 @@ Fan connects through the relay's NO/COM contacts, powered from the same 5V sourc
 ### Prerequisites
 
 - [PlatformIO](https://platformio.org/) (VSCode extension or CLI)
-- ESP32 board, MLX90614 sensor, and relay wired per the diagram above
+- ESP32 board, MLX90614 sensor, TFT display, and relay wired per the diagram above
 
 ### Setup
 
@@ -59,17 +81,26 @@ Fan connects through the relay's NO/COM contacts, powered from the same 5V sourc
    or use the PlatformIO extension for VSCode
 
 ## Project Structure
-
 ```
-BabyFoodCooler/
+CoolBaby/
 ├── include/
 ├── src/
 │ └── main.cpp # Main application logic
 ├── test/
+│ ├── test_sensor.cpp # Standalone MLX90614 sensor test
+│ └── test_display.cpp # Combined sensor + display test
 ├── platformio.ini # PlatformIO project configuration
 ├── README.md
 └── .gitignore
 ```
+
+
+## Roadmap
+
+- [ ] Relay/fan control based on temperature threshold
+- [ ] Hysteresis to avoid relay flickering near threshold
+- [ ] Adjustable temperature threshold
+- [ ] Status LED indicator
 
 ## License
 
